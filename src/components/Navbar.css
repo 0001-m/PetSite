@@ -1,0 +1,112 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-100);
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--dark);
+}
+
+.logo-icon {
+  font-size: 1.3rem;
+  background: var(--cyan-light);
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.navbar-links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  transition: color 0.2s;
+}
+
+.navbar-links a:hover { color: var(--cyan-dark); }
+
+.nav-donate-btn {
+  background: var(--cyan) !important;
+  color: var(--white) !important;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 600 !important;
+  transition: background 0.2s !important;
+}
+
+.nav-donate-btn:hover { background: var(--cyan-dark) !important; }
+
+.nav-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--cyan);
+  color: white;
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.navbar-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--dark);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .navbar-hamburger { display: flex; }
+
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    flex-direction: column;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--gray-100);
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .navbar-links.open { display: flex; }
+}
