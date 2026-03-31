@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import './ContactPage.css';
 
 const faqs = [
@@ -43,22 +45,7 @@ export default function ContactPage() {
   return (
     <div className="contact-page">
 
-      {/* ── NAVBAR ── */}
-      <nav className="cp-nav">
-        <div className="cp-nav-inner">
-          <Link to="/" className="cp-logo">
-            <span className="cp-logo-icon">🐾</span>
-            <span>Pawsitive Connections</span>
-          </Link>
-          <ul className="cp-nav-links">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/adopt">Adopt</Link></li>
-            <li><Link to="/donate">Donate</Link></li>
-            <li><Link to="/contact" className="cp-nav-active">Contact</Link></li>
-          </ul>
-          <div className="cp-nav-avatar">P</div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* ── HERO HEADER ── */}
       <header className="cp-header">
@@ -209,54 +196,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer className="cp-footer">
-        <div className="cp-footer-inner">
-          <div className="cp-footer-brand">
-            <div className="cp-footer-logo">
-              <span className="cp-logo-icon">🐾</span>
-              <strong>Pawsitive Connections</strong>
-            </div>
-            <p className="cp-footer-tag">
-              Connecting loving homes with pets in need since 2015. Every life deserves a second chance.
-            </p>
-          </div>
-
-          {Object.entries(footerLinks).map(([title, items]) => (
-            <div className="cp-footer-col" key={title}>
-              <h4>{title}</h4>
-              <ul>
-                {items.map((item) => (
-                  <li key={item}><a href="#">{item}</a></li>
-                ))}
-              </ul>
-            </div>
-          ))}
-
-          <div className="cp-footer-col">
-            <h4>Newsletter</h4>
-            <p className="cp-footer-newsletter-desc">Get cute pet photos and updates in your inbox.</p>
-            <div className="cp-newsletter-form">
-              <input
-                type="email"
-                placeholder="Email"
-                value={newsEmail}
-                onChange={(e) => setNewsEmail(e.target.value)}
-              />
-              <button>→</button>
-            </div>
-          </div>
-        </div>
-
-        <div className="cp-footer-bottom">
-          <p>© 2024 Pawsitive Connections. All rights reserved.</p>
-          <div className="cp-footer-bottom-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookie Policy</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
     </div>
   );

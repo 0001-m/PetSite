@@ -1,47 +1,104 @@
-import React from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
-const links = {
-  'Quick Links': ['Browse All Pets', 'Success Stories', 'Partner Shelters', 'Pet Care Tips'],
-  Support: ['Help Center', 'Contact Us', 'Donation Program', 'Volunteer'],
-  Company: ['About Us', 'Careers', 'Privacy Policy', 'Terms of Service'],
-};
+const quickLinks = [
+  { label: 'Find a Pet',        to: '/adopt' },
+  { label: 'Success Stories',   to: '/success-stories' },
+  { label: 'Shelter Partner',   to: '/shelters' },
+  { label: 'Pet Care Tips',     to: '/tips' },
+];
 
-export default function Footer() {
+const supportLinks = [
+  { label: 'Donate',            to: '/donate' },
+  { label: 'Volunteer',         to: '/volunteer' },
+  { label: 'Fostering',         to: '/foster' },
+  { label: 'FAQ',               to: '/contact' },
+];
+
+const legalLinks = [
+  { label: 'Privacy Policy',    to: '/privacy' },
+  { label: 'Terms of Service',  to: '/terms' },
+  { label: 'Adoption Policy',   to: '/adoption-policy' },
+  { label: 'Cookie Settings',   to: '/cookies' },
+];
+
+export default function Footer({ variant = 'light' }) {
+  const [email, setEmail] = useState('');
+  const isDark = variant === 'dark';
+
   return (
-    <footer className="footer">
+    <footer className={"site-footer " + (isDark ? 'footer-dark' : 'footer-light')}>
       <div className="footer-inner">
         <div className="footer-brand">
           <div className="footer-logo">
-            <span className="logo-icon">🐾</span>
-            <span>Pawsitive Connections</span>
+            <span className="footer-logo-icon">🐾</span>
+            <strong>Pawsitive Connections</strong>
           </div>
           <p className="footer-tagline">
-            The world's largest pet adoption platform, dedicated to finding the
-            perfect match for every animal in need.
+            {isDark
+              ? 'Connecting loving hearts with paws in need. We are a registered 501(c)(3) non-profit organization dedicated to animal welfare.'
+              : "The world's leading pet adoption platform, dedicated to finding every animal a loving, permanent home."}
           </p>
           <div className="footer-socials">
-            <a href="#" className="social-btn" aria-label="Facebook">🌐</a>
-            <a href="#" className="social-btn" aria-label="Twitter">🔗</a>
+            <a href="#" className="footer-social-btn" aria-label="Website">🌐</a>
+            <a href="#" className="footer-social-btn" aria-label="Instagram">📸</a>
+            <a href="#" className="footer-social-btn" aria-label="Share">🔗</a>
           </div>
         </div>
 
-        {Object.entries(links).map(([title, items]) => (
-          <div className="footer-col" key={title}>
-            <h4 className="footer-col-title">{title}</h4>
-            <ul className="footer-col-links">
-              {items.map((item) => (
-                <li key={item}>
-                  <a href="#">{item}</a>
-                </li>
-              ))}
-            </ul>
+        <div className="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            {quickLinks.map(l => (
+              <li key={l.label}><Link to={l.to}>{l.label}</Link></li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="footer-col">
+          <h4>{isDark ? 'Support' : 'Legal'}</h4>
+          <ul>
+            {(isDark ? supportLinks : legalLinks).map(l => (
+              <li key={l.label}><Link to={l.to}>{l.label}</Link></li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="footer-col">
+          <h4>Newsletter</h4>
+          <p className="footer-newsletter-desc">
+            {isDark
+              ? 'Stay updated with rescue stories and adoption events.'
+              : 'Get cute pet photos and updates in your inbox.'}
+          </p>
+          <div className="footer-newsletter-form">
+            <input
+              type="email"
+              placeholder="Email address"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+            <button aria-label="Subscribe">→</button>
           </div>
-        ))}
+        </div>
       </div>
 
       <div className="footer-bottom">
-        <p>© 2024 Pawsitive Connections. All rights reserved. Made with love for animals everywhere.</p>
+        <p>© 2024 Pawsitive Connections. All rights reserved. Made with love for animals.</p>
+        {isDark ? (
+          <div className="footer-bottom-socials">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+          </div>
+        ) : (
+          <div className="footer-bottom-links">
+            <Link to="/privacy">Privacy Policy</Link>
+            <Link to="/terms">Terms of Service</Link>
+            <Link to="/cookies">Cookie Policy</Link>
+          </div>
+        )}
       </div>
     </footer>
   );
